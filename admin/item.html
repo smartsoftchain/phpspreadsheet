@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	
+	<!-- start: Meta -->
+	<meta charset="utf-8">
+	<title>{val title}</title>
+	<meta name="description" content="Bootstrap Metro Dashboard">
+	<meta name="author" content="Dennis Ji">
+	<meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+	<!-- end: Meta -->
+	
+	<!-- start: Mobile Specific -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- end: Mobile Specific -->
+	
+	<!-- start: CSS -->
+	<link id="bootstrap-style" href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link id="base-style" href="css/style.css" rel="stylesheet">
+	<link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+	<!-- end: CSS -->
+	
+
+	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<link id="ie-style" href="css/ie.css" rel="stylesheet">
+	<![endif]-->
+	
+	<!--[if IE 9]>
+		<link id="ie9style" href="css/ie9.css" rel="stylesheet">
+	<![endif]-->
+		
+	<!-- start: Favicon -->
+	<link rel="shortcut icon" href="img/favicon.ico">
+	<!-- end: Favicon -->
+	
+		
+		
+		
+</head>
+
+<body>
+		<!-- start: Header -->
+		{include header.tpl}
+	<!-- start: Header -->
+	
+		<div class="container-fluid-full">
+		<div class="row-fluid">
+				
+			<!-- start: Main Menu -->
+			{include menu.tpl}
+			<!-- end: Main Menu -->
+			
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+			
+			<!-- start: Content -->
+			<div id="content" class="span10">
+			
+			
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="index.html">Home</a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				<li><a href="#">{val titles}</a></li>
+			</ul>
+
+			<div class="row-fluid">
+				<div class="box span12">
+					<div class="box-content">
+						<form class="form-horizontal" action="./?act=datas" id="form1" method="post">
+						<input type="hidden" name="page" id="page" value="{val page}">
+							
+							<fieldset>
+							  <div class="control-group">
+								クライアント名：<input class="span3 focused" id="order" name="search[name]" type="text" value="{val search/name}">
+								商品コード：<input class="span3 focused" id="order" name="search[code]" type="text" value="{val search/code}">
+								商品名：<input class="span2 focused" id="order" name="search[title]" type="text" value="{val search/title}">
+								
+							  </div>
+							</fieldset>
+							
+							<div class="form-actions">
+								<button type="button" id="send1" class="btn btn-primary"> 検 索 </button>
+							</div>
+							
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header">
+						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>商品管理&nbsp;&nbsp;[<a href="./?act=item_edit">商品登録</a>]</h2>
+					</div>
+					<div class="box-content">
+						<table class="table table-bordered table-striped table-condensed">
+							  <thead>
+								  <tr>
+								  	  <th></th>
+									  <th>クライアント名</th>
+									  <th>商品コード</th>
+									  <th>商品名</th>
+									  <th>アクション</th>
+								  </tr>
+							  </thead>   
+							  <tbody>
+							  <!--{each list}-->
+								<tr>
+									<td>{val list/id}</td>
+									<td>{val list/name}</td>
+									<td>{val list/code}</td>
+									<td>{val list/title}</td>
+									<td>
+										<a href="./?act=item_update&id={val list/id}"><button class="btn btn-success"> 編集</button></a>
+										<a href="javascript:void(0);" rel="{val list/id}" class="sheets"><button class="btn btn-primary"> シート更新</button></a>
+										<a href="javascript:void(0);" class="dels" id="{val list/id}"><button class="btn btn-danger"> 削除</button></a>
+										<a href="{val list/sheet_url}"target="_blank"><button class="btn btn-success"> スプレッドシート</button></a>
+									</td>
+								</tr>
+							　<!--{/each}-->
+							  </tbody>
+						 </table>  
+						 <div class="pagination pagination-centered">
+						  <ul>
+						  {val pagingstring}
+						  </ul>
+						</div>     
+					</div>
+				</div><!--/span-->
+				
+			</div>		
+	</div><!--/.fluid-container-->
+	
+			<!-- end: Content -->
+		</div><!--/#content.span10-->
+		</div><!--/fluid-row-->
+		
+	<div class="modal hide fade" id="myModal">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">??</button>
+			<h3>Settings</h3>
+		</div>
+		<div class="modal-body">
+			<p>Here settings can be configured...</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" class="btn btn-primary">Save changes</a>
+		</div>
+	</div>
+	
+	<div class="clearfix"></div>
+	
+{include footer.tpl}
+	
+{include script.tpl}
+
+	<script type="text/javascript">
+        $(document).ready(function() {
+        	$("#send1").click(function(){
+        		$("#form1").submit();
+        	
+        	});
+        	$(".pageBtn").click(function(){
+			   var id = $(this).attr("rel");
+			    if(id){
+			    	$("#page").val(id);
+			    	$("#form1").submit();
+			    }
+			    	
+			 });
+			 $(".dels").click(function(){
+        		var id = $(this).attr("id");
+        		if(confirm("このデータを削除します。よろしいですか？")){
+        			location.href="./?act=item&mode=del&did="+id;
+        		}else{
+        			return false;
+        		}
+        	
+        	});
+			 $(".sheets").click(function(){
+        		var rel = $(this).attr("rel");
+        		$.post(
+					"index.php?act=sheet_update",
+					{ id: rel })
+					.done(function(res) {
+						alert(res);
+				});
+        	});
+    	});
+    </script>
+
+</body>
+</html>

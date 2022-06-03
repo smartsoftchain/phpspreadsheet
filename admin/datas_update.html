@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	
+	<!-- start: Meta -->
+	<meta charset="utf-8">
+	<title>{val title}</title>
+	<meta name="description" content="Bootstrap Metro Dashboard">
+	<meta name="author" content="Dennis Ji">
+	<meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+	<!-- end: Meta -->
+	
+	<!-- start: Mobile Specific -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- end: Mobile Specific -->
+	
+	<!-- start: CSS -->
+	<link id="bootstrap-style" href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link id="base-style" href="css/style.css" rel="stylesheet">
+	<link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+	<!-- end: CSS -->
+	
+
+	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<link id="ie-style" href="css/ie.css" rel="stylesheet">
+	<![endif]-->
+	
+	<!--[if IE 9]>
+		<link id="ie9style" href="css/ie9.css" rel="stylesheet">
+	<![endif]-->
+		
+	<!-- start: Favicon -->
+	<link rel="shortcut icon" href="img/favicon.ico">
+	<!-- end: Favicon -->
+	
+		
+		
+		
+</head>
+
+<body>
+		<!-- start: Header -->
+		{include header.tpl}
+	<!-- start: Header -->
+	
+		<div class="container-fluid-full">
+		<div class="row-fluid">
+				
+			<!-- start: Main Menu -->
+			{include menu.tpl}
+			<!-- end: Main Menu -->
+			
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+			
+			<!-- start: Content -->
+			<div id="content" class="span10">
+			
+			
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="index.html">Home</a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				<li><a href="#">{val titles}</a></li>
+			</ul>
+
+
+			<!--{def message}-->
+					<div class="box-content alerts">
+						<div class="alert alert-info">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							{val message}
+						</div>
+					</div>
+			<!--{/def}-->
+			<div class="row-fluid">
+				<form class="form-horizontal" action="./?act=datas_update&id={val id}" id="form1" method="post">
+						<input type="hidden" name="mode" id="mode" value="update">
+						<fieldset>
+							  <div class="control-group">
+								<label class="control-label" for="focusedInput">顧客名</label>
+								<div class="controls">
+								  <input class="span8 focused" id="name" name="form[name]" type="text" value="{val list/name}">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="focusedInput">ログインメールアドレス</label>
+								<div class="controls">
+								  <input class="span3 focused" id="mailadd" name="form[mailadd]" type="text" value="{val list/mailadd}">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="focusedInput">ログインパスワード</label>
+								<div class="controls">
+								  <input class="span3 focused" id="passwd" name="form[passwd]" type="text" value="{val list/passwd}">
+								</div>
+							  </div>
+						
+						
+						
+							<div class="form-actions">
+								<button type="button" id="send1" class="btn btn-primary"> 更　新 </button>
+							</div>
+							</fieldset>
+				</form>
+				
+				
+			</div>		
+	</div><!--/.fluid-container-->
+	
+			<!-- end: Content -->
+		</div><!--/#content.span10-->
+		</div><!--/fluid-row-->
+		
+	<div class="modal hide fade" id="myModal">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">??</button>
+			<h3>Settings</h3>
+		</div>
+		<div class="modal-body">
+			<p>Here settings can be configured...</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" class="btn btn-primary">Save changes</a>
+		</div>
+	</div>
+	
+	<div class="clearfix"></div>
+	
+{include footer.tpl}
+	
+{include script.tpl}
+	<script type="text/javascript">
+        $(document).ready(function() {
+        	$("#send1").click(function(){
+        		if(confirm("この情報で更新します。よろしいですか？")){
+        			$("#form1").submit();
+        		}else{
+        			return false;
+        		}
+        	
+        	});
+    	});
+    </script>
+</body>
+</html>

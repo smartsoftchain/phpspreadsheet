@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ja" dir="ltr">
+  <head>
+	{include header.tpl}
+  </head>
+  <body class="">
+    <div class="page">
+      <div class="page-main">
+
+        <div class="my-3 my-md-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+				<div class="card">
+                  <div class="card-body">
+                  <!--{def code}-->
+                  	<h1>メッセージ自動作成ツール</h1>
+					<a href="javascript:void(0);" rel="{val pid}" class="sheets"><button class="btn btn-primary"> シート更新</button></a>
+						<table>
+							<tr>
+								<td class="label"><p>{val title0}</p>
+								<input type="button" class="Btn" name="a" id="0" value="{val titles0}"></td>
+								<td class="content"><textarea id="{val code}_0_val" class="areas"></textarea></td>
+							</tr>
+							<tr>
+								<td colspan="2">{val title1}：
+									<select name="b" id="b" style="width:1000px;">
+									<option value="" selected="selected">選択してください</option>
+									<!--{each list}-->
+									<option value="{val list/key}">{val list/value}</option>
+									<!--{/each}-->
+									</select>
+								<p><textarea id="b_val" class="areas"></textarea></p>
+								</td>
+							</tr>
+							<tr>
+								<td><p>{val title2}</p>
+								<input type="button" class="Btn" name="c" id="2" value="{val titles2}"></td>
+								<td><textarea id="{val code}_2_val" class="areas"></textarea></td>
+							</tr>
+							<tr>
+								<td><p>{val title3}</p>
+								<input type="button" class="Btn" name="d" id="3" value="{val titles3}"></td>
+								<td><textarea id="{val code}_3_val" class="areas"></textarea></td>
+							</tr>
+							<tr>
+								<td><p>{val title4}</p>
+								<input type="button" class="Btn" name="e" id="4" value="{val titles4}"></td>
+								<td><textarea id="{val code}_4_val" class="areas"></textarea></td>
+							</tr>
+							</table>
+							<p class="create-btn"><input class="create" type="button" name="buttons" id="create" value="生 成"></p>
+							<hr>
+							<p class="result-message">
+								<textarea id="result" class="areas2"></textarea>
+							</p>
+							
+					
+                  <!--{/def}-->
+                  </div>
+              	</div>
+              </div>
+              
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <footer class="footer">
+      {include footer.tpl}
+    </footer>
+  </div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.Btn').click(function() {
+    	var id = $(this).attr("id");
+        $.post("index.php?act=no",
+		{ id:id,code: '{val code}' })
+		.done(function(res) {
+			$("#{val code}_"+id+"_val").html(res);
+		});
+    });
+    $('#b').change(function() {
+    	var id = $(this).val();
+        $.post("index.php?act=no1",
+		{ ids: id,code: '{val code}' })
+		.done(function(res) {
+			$("#b_val").html(res);
+		});
+    });
+    $('#create').click(function() {
+    	var str = "";
+    	$('.areas').each(function(index, value){
+		    str += $(value).val()+"\n\n";
+		  });
+    	$("#result").html(str);
+    });
+			 $(".sheets").click(function(){
+        		var rel = $(this).attr("rel");
+        		$.post(
+					"admin/index.php?act=sheet_update",
+					{ id: rel })
+					.done(function(res) {
+						alert(res);
+				});
+        	});
+    
+    $("#result").on("click",function(){
+	 $(this).select();
+	 document.execCommand('copy');
+	});
+});
+</script>
+</body>
+</html>
